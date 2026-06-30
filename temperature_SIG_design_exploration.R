@@ -47,12 +47,13 @@ library(GGally)
 library(MASS)
 library(Matrix)
 
-# Declare current script location to set project root
+# This is a safety check to make sure that this script is 
+# in the associated project folder.
 here::i_am("temperature_SIG_design_exploration.R")
 
 # Source the custom C++ functions for stability
-source(here("support_file_stable_SIG_CPP_function.R"))
-source(here("support_file_stable_utility_function.R"))
+source(here("00_support_file_stable_SIG_CPP_function.R"))
+source(here("00_support_file_stable_utility_function.R"))
 environment(utilitynlmTemp) <- asNamespace("acebayes")
 assignInNamespace("utilitynlm", utilitynlmTemp, ns = "acebayes")
 
@@ -63,7 +64,7 @@ assignInNamespace("utilitynlm", utilitynlmTemp, ns = "acebayes")
 # If the parameters are independent, they often result in unrealistic TPCs
 # The script with the temperature prior function is in the Github repo.
 # Feel free to customize it and calculate new designs.
-source(here("temperature_prior.R"))
+source(here("00_support_file_temperature_prior.R"))
 
 # The function inside the sourced file is named 'prior', we rename it 
 # to 'norberg_prior'

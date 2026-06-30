@@ -54,8 +54,8 @@ here::i_am("light_SIG_design_exploration.R")
 # large negative log-likelihood values.
 # We have fixed this issue and are sourcing the modified code below
 # The files are in the Github repo. Save them into the same folder that you save this file.
-source(here("support_file_stable_SIG_CPP_function.R"))
-source(here("support_file_stable_utility_function.R"))
+source(here("00_support_file_stable_SIG_CPP_function.R"))
+source(here("00_support_file_stable_utility_function.R"))
 environment(utilitynlmTemp) <- asNamespace("acebayes")
 assignInNamespace("utilitynlm", utilitynlmTemp, ns = "acebayes")
 

@@ -47,7 +47,8 @@ library(tidyr)
 library(patchwork)
 library(scales)
 
-# NOTE: The original script sourced custom C++ functions for stability. 
+# This is a safety check to make sure that this script is 
+# in the associated project folder. 
 here::i_am("toxin_SIG_design_exploration.R")
 
 # The original package's code occasionally results in Inf or -Inf SIG values 
@@ -55,8 +56,8 @@ here::i_am("toxin_SIG_design_exploration.R")
 # large negative log-likelihood values.
 # We have fixed this issue and are sourcing the modified code below
 # The files are in the Github repo. Save them into the same folder that you save this file.
-source(here("support_file_stable_SIG_CPP_function.R"))
-source(here("support_file_stable_utility_function.R"))
+source(here("00_support_file_stable_SIG_CPP_function.R"))
+source(here("00_support_file_stable_utility_function.R"))
 environment(utilitynlmTemp) <- asNamespace("acebayes")
 assignInNamespace("utilitynlm", utilitynlmTemp, ns = "acebayes")
 
