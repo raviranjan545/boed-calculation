@@ -1,54 +1,53 @@
 # SIG-Optimal Experimental Design Exploration
 
-This repository contains interactive R scripts for exploring and calculating 5-point SIG-optimal experimental designs across four different environmental driver models (nutrients, light, toxins and temperature). 
+This repository contains interactive R scripts for exploring and calculating SIG-optimal experimental designs with 5 experimental units across four different environmental driver models (nutrients, light, toxins and temperature). These scripts are associated with our [preprint](https://doi.org/10.64898/2026.05.28.728579), where we developed SIG-optimal designs for these four drivers with 5, 7, 10 and 15 experimental units. Similar to the preprint, the scripts utilize the Approximate Coordinate Exchange (ACE) algorithm via the `acebayes` package to find experimental designs that maximize the expected Shannon Information Gain (SIG) for non-linear models. Calculating Bayesian optimal designs can take a long time, so the scripts here are meant as a stepping stone to familiarize yourself with the ACE algorithm and explore different settings such as priors, design spaces etc. Before exploring these scripts, we strongly recommend reading the overview of ACE in the [Supplementary Information](https://www.biorxiv.org/content/10.64898/2026.05.28.728579v2.supplementary-material) of our preprint.
 
-These scripts utilize the Approximate Coordinate Exchange (ACE) algorithm via the `acebayes` package to find experimental designs that maximize the expected Shannon Information Gain (SIG) for non-linear models.
+Note that this repository is *not* meant to reproduce the analysis and figures in the print. The code to reproduce the preprint results can be found [here](https://github.com/raviranjan545/boed-paper-reproduction).
 
 ## Getting Started
 
 ## 1. Open the R Project
-To ensure all file paths work correctly, **you must open this project using the `.Rproj` file.** 
-1. Download or clone this repository to your computer.
-2. Double-click the `.Rproj` file to launch RStudio. 
-3. This will automatically lock your working directory to the project root, allowing the `here` package to navigate the folders seamlessly.
+
+To ensure all file paths work correctly, **you must open this project using the `.Rproj` file.** 1. Download or clone this repository to your computer. 2. Double-click the `.Rproj` file to launch RStudio. 3. This will automatically lock your working directory to the project root, allowing the `here` package to navigate the folders seamlessly.
 
 ## 2. Dependencies
+
 The exploratory scripts will automatically attempt to install missing packages when run. However, you can manually install the required dependencies by running:
-  
-  ```r
+
+``` r
 install.packages(c("acebayes", "ggplot2", "dplyr", "tidyr", "here", 
-                   "parallel", "patchwork", "scales", "GGally", "MASS", "Matrix"))
-  ```
+                 "parallel", "patchwork", "scales", "GGally", "MASS", "Matrix"))
+```
+
 ## 3. Repository Structure
 
-* **`*.Rproj`**: The RStudio project file. Always open the project using this file.
-* **Exploratory Scripts**: 
-  * `light_SIG_design_exploration.R` (Eilers-Peeters)
-* `toxin_SIG_design_exploration.R` (Log-logistic)
-* `temperature_SIG_design_exploration.R` (Norberg)
-* `nutrients_SIG_design_exploration.R` (Monod)
-* **Support Files**: 
-  * `stable_SIG_CPP_function.R` & `stable_utility_function.R`: Custom C++ and utility functions sourced by the scripts to prevent underflow issues during log-likelihood calculations.
-* `temperature_prior.R`: Generates the correlated multivariate normal prior used specifically for the Norberg temperature model.
+- **`*.Rproj`**: The RStudio project file. Always open the project using this file.
+- **Exploratory Scripts**:
+  - `light_SIG_design_exploration.R` (Eilers-Peeters)
+- `toxin_SIG_design_exploration.R` (Log-logistic)
+- `temperature_SIG_design_exploration.R` (Norberg)
+- `nutrients_SIG_design_exploration.R` (Monod)
+- **Support Files**:
+  - `stable_SIG_CPP_function.R` & `stable_utility_function.R`: Custom C++ and utility functions sourced by the scripts to prevent underflow issues during log-likelihood calculations.
+- `temperature_prior.R`: Generates the correlated multivariate normal prior used specifically for the Norberg temperature model.
 
 ## 4. How to Use the Scripts
 
 Each exploratory script is divided into sequential sections:
-  
-1. **Setup:** Loads packages, sets the working directory via `here::i_am()`, and sources the stable calculation files.
-2. **Prior Visualization:** Draws samples from the specified prior distributions (either independent lognormal or correlated multivariate normal) and plots them.
-3. **Design Calculation:** Uses the `acenlm()` and `pacenlm()` functions to search a specified grid for the optimal 5-point design.
-4. **Result Visualization:** Plots the final optimal design. 
+
+1.  **Setup:** Loads packages, sets the working directory via `here::i_am()`, and sources the stable calculation files.
+2.  **Prior Visualization:** Draws samples from the specified prior distributions (either independent lognormal or correlated multivariate normal) and plots them.
+3.  **Design Calculation:** Uses the `acenlm()` and `pacenlm()` functions to search a specified grid for the optimal 5-point design.
+4.  **Result Visualization:** Plots the final optimal design.
 
 ### Important Note on Parallel Processing (Windows vs. Mac/Linux)
 
 The `acebayes` package relies on fork-based parallel processing (`mclapply`) to rapidly evaluate multiple starting designs via the `pacenlm()` function. **This is not supported on Windows.**
 
-To accommodate all users, the design calculation section of these scripts is split into two blocks:
-* **Mac/Linux Users:** Can run the default `pacenlm()` code block.
-* **Windows Users:** Must comment out the Mac/Linux block and uncomment the Windows block. The Windows block manually builds a PSOCK cluster (`parLapply`), exports the required packages and environments to the workers and reconstructs the pacenlm output object.
+To accommodate all users, the design calculation section of these scripts is split into two blocks: \* **Mac/Linux Users:** Can run the default `pacenlm()` code block. \* **Windows Users:** Must comment out the Mac/Linux block and uncomment the Windows block. The Windows block manually builds a PSOCK cluster (`parLapply`), exports the required packages and environments to the workers and reconstructs the pacenlm output object.
 
 ## Further reading
 
-Before exploring these scripts, we strongly recommend reading the overview of ACE in the Supplementary Information of our preprint: https://doi.org/10.64898/2026.05.28.728579.
-For a deeper technical explanation, see Overstall, A. M., Woods, D. C., & Parker, B. M. (2020). Bayesian optimal design for ordinary differential equation models with application in biological science. Journal of the American Statistical Association.
+For a deeper technical explanation of the ACE algorithm, see the original paper:
+
+[Overstall, A. M., Woods, D. C., & Parker, B. M. (2020). Bayesian optimal design for ordinary differential equation models with application in biological science. Journal of the American Statistical Association.](https://www.tandfonline.com/doi/full/10.1080/00401706.2016.1251495)
