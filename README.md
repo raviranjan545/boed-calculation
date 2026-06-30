@@ -4,7 +4,7 @@ This repository contains interactive R scripts for exploring and calculating 5-p
 
 These scripts utilize the Approximate Coordinate Exchange (ACE) algorithm via the `acebayes` package to find experimental designs that maximize the expected Shannon Information Gain (SIG) for non-linear models.
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Open the R Project
 To ensure all file paths work correctly, **you must open this project using the `.Rproj` file.** 
@@ -18,7 +18,7 @@ The exploratory scripts will automatically attempt to install missing packages w
   ```r
 install.packages(c("acebayes", "ggplot2", "dplyr", "tidyr", "here", 
                    "parallel", "patchwork", "scales", "GGally", "MASS", "Matrix"))
-
+  ```
 ## 3. Repository Structure
 
 * **`*.Rproj`**: The RStudio project file. Always open the project using this file.
