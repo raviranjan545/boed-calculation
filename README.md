@@ -6,13 +6,13 @@ These scripts utilize the Approximate Coordinate Exchange (ACE) algorithm via th
 
 ## Getting Started
 
-### 1. Open the R Project
+## 1. Open the R Project
 To ensure all file paths work correctly, **you must open this project using the `.Rproj` file.** 
 1. Download or clone this repository to your computer.
 2. Double-click the `.Rproj` file to launch RStudio. 
 3. This will automatically lock your working directory to the project root, allowing the `here` package to navigate the folders seamlessly.
 
-### 2. Dependencies
+## 2. Dependencies
 The exploratory scripts will automatically attempt to install missing packages when run. However, you can manually install the required dependencies by running:
   
   ```r
@@ -31,7 +31,7 @@ install.packages(c("acebayes", "ggplot2", "dplyr", "tidyr", "here",
   * `stable_SIG_CPP_function.R` & `stable_utility_function.R`: Custom C++ and utility functions sourced by the scripts to prevent underflow issues during log-likelihood calculations.
 * `temperature_prior.R`: Generates the correlated multivariate normal prior used specifically for the Norberg temperature model.
 
-## How to Use the Scripts
+## 4. How to Use the Scripts
 
 Each exploratory script is divided into sequential sections:
   
@@ -48,7 +48,7 @@ To accommodate all users, the design calculation section of these scripts is spl
 * **Mac/Linux Users:** Can run the default `pacenlm()` code block.
 * **Windows Users:** Must comment out the Mac/Linux block and uncomment the Windows block. The Windows block manually builds a PSOCK cluster (`parLapply`), exports the required packages and environments to the workers and reconstructs the pacenlm output object.
 
-## 📖 Methodology
+## Further reading
 
-For a brief overview of the ACE algorithm and how Approximate Expected SIG is calculated, we strongly recommend reading the overview of ACE in the Supplementary Information of the associated manuscript: https://doi.org/10.64898/2026.05.28.728579
+Before exploring these scripts, we strongly recommend reading the overview of ACE in the Supplementary Information of our preprint: https://doi.org/10.64898/2026.05.28.728579.
 For a deeper technical explanation, see Overstall, A. M., Woods, D. C., & Parker, B. M. (2020). Bayesian optimal design for ordinary differential equation models with application in biological science. Journal of the American Statistical Association.
