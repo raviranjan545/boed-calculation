@@ -1,10 +1,10 @@
 # Calculating Bayesian SIG-Optimal Experimental Designs
 
-This repository contains interactive R scripts for exploring and calculating SIG-optimal experimental designs across four different environmental driver models (nutrients, light, toxins and temperature). These scripts are associated with our [preprint](https://doi.org/10.64898/2026.05.28.728579), where we developed SIG-optimal designs for these four drivers. Similar to the preprint, the scripts utilize the Approximate Coordinate Exchange (ACE) algorithm via the `acebayes` package to find experimental designs that maximize the expected Shannon Information Gain (SIG) for non-linear models. 
+This repository contains interactive R scripts for exploring and calculating SIG-optimal experimental designs across four different environmental driver models (nutrients, light, toxins and temperature). These scripts find experimental designs that maximize the expected Shannon Information Gain (SIG) from the prior to the posterior for non-linear models, and are associated with our [preprint](https://doi.org/10.64898/2026.05.28.728579). They use the Approximate Coordinate Exchange (ACE) algorithm via the `acebayes` package. 
 
 Calculating Bayesian optimal designs can take a long time. We have chosen default values for the number of experimental units, a design space, priors, and additional settings that govern how long and how carefully the algorithm will search for an optimal design (not very long by default). We strongly recommend reading the overview of ACE in the [Supplementary Information](https://www.biorxiv.org/content/10.64898/2026.05.28.728579v3.supplementary-material) of our preprint and thinking about the settings most applicable to your experiment before running a fine-grained search for the best design.
 
-Note that this repository is *not* meant to reproduce the analysis and figures in the preprint. The code to reproduce all preprint results can be found [here](https://github.com/raviranjan545/boed-paper-reproduction). 
+Note that this repository is *not* meant to reproduce the analysis and figures in the preprint. The code to reproduce all preprint results and figures can be found [here](https://github.com/raviranjan545/boed-paper-reproduction). 
 
 ## Getting Started
 
